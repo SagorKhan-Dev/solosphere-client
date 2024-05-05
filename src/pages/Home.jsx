@@ -3,11 +3,10 @@ import Carousel from "../components/Carousel";
 import TabCategories from "../components/TabCategories";
 
 const Home = () => {
-  const jobs = useLoaderData();
   return (
     <div>
       <Carousel />
-      <TabCategories jobs={jobs} />
+      <TabCategories />
     </div>
   );
 };

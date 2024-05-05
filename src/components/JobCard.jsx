@@ -1,5 +1,4 @@
 const JobCard = ({ job }) => {
-  console.log(job);
   const {
     category,
     description,
