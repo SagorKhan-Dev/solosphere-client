@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 const JobCard = ({ job }) => {
   const {
+    _id,
     category,
     description,
     job_title,
@@ -7,10 +10,13 @@ const JobCard = ({ job }) => {
     min_price,
     max_price,
     buyer_email,
-  } = job;
+  } = job || {};
 
   return (
-    <div className="w-full max-w-sm px-5 py-4 bg-white rounded-md shadow-md hover:scale-[1.05] transition-all">
+    <Link
+      to={`/job/${_id}`}
+      className="w-full max-w-sm px-5 py-4 bg-white rounded-md shadow-md hover:scale-[1.05] transition-all"
+    >
       <div className="flex items-center justify-between">
         <span className="text-sm font-light text-gray-800 ">
           Deadline: {deadline}
@@ -25,12 +31,14 @@ const JobCard = ({ job }) => {
           {job_title}
         </h1>
 
-        <p className="mt-2 text-base text-gray-600 ">{description}</p>
+        <p title={description} className="mt-2 text-base text-gray-600">
+          {description.substring(0, 70)}....
+        </p>
         <p className="mt-2 text-base font-bold text-gray-600 ">
           Range: ${min_price}- ${max_price}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
