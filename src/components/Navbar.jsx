@@ -46,16 +46,16 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link className="justify-between">Add Job</Link>
+                <Link to="add-job" className="justify-between">Add Job</Link>
               </li>
               <li>
-                <Link>My Posted Jobs</Link>
+                <Link to="my-posted-jobs">My Posted Jobs</Link>
               </li>
               <li>
-                <Link>My Bids</Link>
+                <Link to="my-bids">My Bids</Link>
               </li>
               <li>
-                <Link>Bid Requests</Link>
+                <Link to="bid-requests">Bid Requests</Link>
               </li>
               <li className="mt-2">
                 <button
