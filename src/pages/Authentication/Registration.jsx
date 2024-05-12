@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/register.jpg";
 import logo from "../../assets/images/logo.png";
 import { useContext } from "react";
@@ -9,6 +9,8 @@ const Registration = () => {
   const navigate = useNavigate();
   const { signInWithGoogle, updateUserProfile, createUser, user, setUser } =
     useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state;
 
   // Email password sign up
   const handleSignUp = async (e) => {
@@ -26,7 +28,7 @@ const Registration = () => {
       console.log(result);
       updateUserProfile(name, photo);
       setUser({ ...user, photoURL: photo, displayName: name });
-      navigate("/");
+      navigate(from, { replace: true });
       toast.success("Signup Successful");
     } catch (error) {
       console.log(error);
