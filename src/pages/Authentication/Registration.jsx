@@ -4,6 +4,7 @@ import logo from "../../assets/images/logo.png";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -25,9 +26,18 @@ const Registration = () => {
     try {
       // user registration
       const result = await createUser(email, pass);
-      console.log(result);
       updateUserProfile(name, photo);
       setUser({ ...user, photoURL: photo, displayName: name });
+      //2. get token from server using email
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
+
       navigate(from, { replace: true });
       toast.success("Signup Successful");
     } catch (error) {
@@ -39,7 +49,17 @@ const Registration = () => {
   // Google sign in
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
+      //1. google sign in in firebase
+      const result = await signInWithGoogle();
+      //2. get token from server using email
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: result?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
       toast.success("Login Successful");
       navigate("/");
     } catch (error) {
